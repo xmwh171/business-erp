@@ -1,0 +1,46 @@
+server:
+  port: 8080
+
+spring:
+  devtools:
+    restart:
+      enabled: true
+  datasource:
+    url: jdbc:sqlserver://10.254.183.55:1433;DatabaseName=toolmall-erp-test
+    username: sa
+    password: Bp133ls4
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: false
+    maxOpenPreparedStatements: -1
+
+
+#spring:
+#  datasource:
+#    username: userfk
+#    password: userfk_ds2019
+#    url: jdbc:jtds:sybase://192.168.100.203:5000/warehouse_sfd
+#    driver-class-name: net.sourceforge.jtds.jdbc.Driver
+#    hikari:
+#      connection-test-query: SELECT 1
+#      idle-timeout: 60000
+#      minimum-idle: 5
+#      maximum-pool-size: 20
+
+
+mybatis:
+  mapper-locations:
+    - classpath:mapper/*.xml
+    - classpath*:com/**/mapper/*.xml
