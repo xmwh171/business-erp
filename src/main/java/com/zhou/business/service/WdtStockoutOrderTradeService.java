@@ -1,6 +1,6 @@
 package com.zhou.business.service;
 
-import com.zhou.business.dal.entity.WdtStockoutOrderTrade;
+import com.zhou.business.dal.toolmall.entity.WdtStockoutOrderTrade;
 
 import java.util.Date;
 import java.util.List;

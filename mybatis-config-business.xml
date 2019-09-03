@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <classPathEntry location="C:/Users/gqf_ds/.m2/repository/com/esen/jdbc/sybase-jconn3/6.0/jconn3.jar" />
+
+    <context id="DB2Tabled" targetRuntime="MyBatis3">
+        <!-- beginningDelimiter和endingDelimiter：指明数据库的用于标记数据库对象名的符号，比如ORACLE就是双引号，MYSQL默认是`反引号； -->
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <plugin type="org.mybatis.generator.plugins.ToStringPlugin"/>
+        <!-- 自动生成equals方法和hashcode方法 -->
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+
+        <commentGenerator type="com.zhou.business.MyGenerator">
+            <property name="javaFileEncoding" value="UTF-8"/>
+            <property name="suppressDate" value="true"/>
+            <property name="suppressAllComments" value="false"/>
+        </commentGenerator>
+
+        <!-- jdbc连接 -->
+        <jdbcConnection driverClass="com.sybase.jdbc3.jdbc.SybDriver"
+                        connectionURL="jdbc:sybase:Tds:192.168.100.203:5000/warehouse_sfd" userId="userfk"
+                        password="userfk_ds2019">
+        </jdbcConnection>
+        <!--mode-->
+        <javaModelGenerator targetPackage="com.zhou.business.dal.business.entity"
+                            targetProject="src/main/java">
+            <property name="enableSubPackages" value="true"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--生成映射文件存放位置-->
+        <sqlMapGenerator targetPackage="com.zhou.business.dal.business.mapper.xml" targetProject="src/main/resources">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--生成Dao类存放位置-->
+        <javaClientGenerator targetPackage="com.zhou.business.dal.business.mapper"
+                             targetProject="src/main/java" type="XMLMAPPER">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!--生成table 先建表 后生成 勿随意覆盖本身table 避免功能缺失  测试 自己找其他表测试 by zxm-->
+        <table tableName="order_head_ds" domainObjectName="OrderHeadDs"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true">
+        </table>
+    </context>
+</generatorConfiguration>

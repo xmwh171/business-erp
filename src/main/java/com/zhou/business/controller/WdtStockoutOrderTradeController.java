@@ -1,7 +1,7 @@
 package com.zhou.business.controller;
 
 import com.zhou.business.common.api.CommonResult;
-import com.zhou.business.dal.entity.WdtStockoutOrderTrade;
+import com.zhou.business.dal.toolmall.entity.WdtStockoutOrderTrade;
 import com.zhou.business.service.WdtStockoutOrderTradeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

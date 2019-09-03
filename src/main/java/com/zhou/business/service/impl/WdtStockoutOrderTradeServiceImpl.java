@@ -1,7 +1,7 @@
 package com.zhou.business.service.impl;
 
-import com.zhou.business.dal.entity.WdtStockoutOrderTrade;
-import com.zhou.business.dal.mapper.WdtStockoutOrderTradeMapper;
+import com.zhou.business.dal.toolmall.entity.WdtStockoutOrderTrade;
+import com.zhou.business.dal.toolmall.mapper.WdtStockoutOrderTradeMapper;
 import com.zhou.business.service.WdtStockoutOrderTradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

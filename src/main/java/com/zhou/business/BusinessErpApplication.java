@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 
 @ComponentScan({"com.zhou.business"})
-@MapperScan(basePackages = {"com.zhou.business.dal.mapper"})
+//@MapperScan(basePackages = {"com.zhou.business.dal"})
 @SpringBootApplication
 public class BusinessErpApplication {
 
