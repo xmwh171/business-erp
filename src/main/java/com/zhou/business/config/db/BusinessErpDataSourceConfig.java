@@ -1,5 +1,6 @@
 package com.zhou.business.config.db;
 
+import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -7,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.liquibase.LiquibaseDataSource;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -41,9 +43,12 @@ public class BusinessErpDataSourceConfig {
     private String driverClassName;
 
     @Bean(name = "businessDataSource")
+    @LiquibaseDataSource
     public DataSource businessDataSource() {
         DataSourceBuilder<HikariDataSource> dataSourceBuilder = DataSourceBuilder.create().type(HikariDataSource.class);
-        return dataSourceBuilder.password(dbPassWord).url(dbUrl).username(dbUser).driverClassName(driverClassName).build();
+        HikariConfig hikariConfig = dataSourceBuilder.password(dbPassWord).url(dbUrl).username(dbUser).driverClassName(driverClassName).build();
+        hikariConfig.setConnectionTestQuery("SELECT 1");
+        return (DataSource)hikariConfig;
     }
 
     @Bean(name = "businessTransactionManager")
