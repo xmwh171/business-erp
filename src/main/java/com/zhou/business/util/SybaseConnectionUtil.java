@@ -2,9 +2,6 @@ package com.zhou.business.util;
 
 import java.sql.*;
 
-        import java.io.InputStream;
-        import java.sql.*;
-
 /**
  * @Description
  * @Author xiaohu

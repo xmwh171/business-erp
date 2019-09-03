@@ -25,4 +25,12 @@ mybatis:
   check-config-location: true
 
 
+## 旺店通账号信息: 测试账号， 有效期至：2019-09-18
+wdt:
+    sid: apidevnew2
+    appkey: tumao2-test
+    appsecret: 12345
+    wangdiantongurl: http://sandbox.wangdian.cn
+
+
 
