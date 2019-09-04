@@ -28,20 +28,6 @@ public class AbstractResultBase {
      */
     protected Map<String, String> resultMap = new HashMap<String, String>();
 
-    /**
-     * 操作对象的编码
-     */
-    protected String no;
-
-
-    public String getNo() {
-        return no;
-    }
-
-    public void setNo(String no) {
-        this.no = no;
-    }
-
     @Override
     public String toString() {
         return ToStringBuilder.reflectionToString(this, ToStringStyle.SHORT_PREFIX_STYLE);

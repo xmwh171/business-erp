@@ -56,17 +56,21 @@ public class SybaseConnectionUtil {
             String sql = "select * from product_ds ";
             rs = stmt.executeQuery(sql);
             int i=1;
-            Map<String,Integer> map = new HashMap<>();
             while (rs.next()) {
-           //     System.out.println(rs.getString("ProId"));
-                Integer count = map.get(rs.getString("ProId"));
-                if(count != null){
-                    map.put(rs.getString("ProId"),++count);
-                }
-                map.put(rs.getString("ProId"),1);
-               // System.out.println("(" + i++ + ")" + "ProId:" + rs.getString("ProId"));
+                System.out.println("(" + i++ + ")" + "UpdateDate:" + rs.getString("UpdateDate"));
             }
-            System.out.println(map);
+
+//            Map<String,Integer> map = new HashMap<>();
+//            while (rs.next()) {
+//           //     System.out.println(rs.getString("ProId"));
+//                Integer count = map.get(rs.getString("ProId"));
+//                if(count != null){
+//                    map.put(rs.getString("ProId"),++count);
+//                }
+//                map.put(rs.getString("ProId"),1);
+//               // System.out.println("(" + i++ + ")" + "ProId:" + rs.getString("ProId"));
+//            }
+//            System.out.println(map);
         } catch (InstantiationException e1) {
             e1.printStackTrace();
         } catch (IllegalAccessException e1) {

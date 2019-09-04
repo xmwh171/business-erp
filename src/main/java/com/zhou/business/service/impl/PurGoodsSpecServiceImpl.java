@@ -81,7 +81,6 @@ public class PurGoodsSpecServiceImpl implements PurGoodsSpecService {
         }
 
         result.setSuccess(true);
-        result.setNo(purGoodsSpec.getSpecNo());
         return result;
     }
 

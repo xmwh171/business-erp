@@ -116,7 +116,6 @@ public class PurGoodsServiceImpl implements PurGoodsService {
             purGoodsMapper.insert(purGoods);
         }
         result.setSuccess(true);
-        result.setNo(purGoods.getGoodsNo());
         return result;
     }
 
@@ -145,10 +144,6 @@ public class PurGoodsServiceImpl implements PurGoodsService {
         List<PurGoodsSpec> purGoodsSpecList = new ArrayList<>();
         Map<String,List<PurGoodsSpec>> goodsSpecMap = new HashMap<>();
 
-        for(ProductDs productDs : productDsList){
-            PurGoods purGoods = new PurGoods();
-
-        }
 
         batchSave(purGoodsList);
         purGoodsSpecService.batchSave(purGoodsSpecList);
@@ -257,38 +252,5 @@ public class PurGoodsServiceImpl implements PurGoodsService {
     }
 
 
-    //    @Override
-//    @Transactional(value = "toolMallTransactionManager", rollbackFor = { Exception.class })
-//    public AbstractResultBase stuffGoods(List<ProductDs> productDsList) {
-//        AbstractResultBase abstractResultBase = new AbstractResultBase();
-//        List<PurGoods> purGoodsList = new ArrayList<>();
-//        List<PurGoodsSpec> purGoodsSpecList = new ArrayList<>();
-//        Map<String,List<PurGoodsSpec>> goodsSpecMap = new HashMap<>();
-//
-//
-//        // 插入货品
-//        PurGoodsOperateResult purGoodsOperateResult = batchCreate(purGoodsList);
-//        if(!purGoodsOperateResult.isSuccess()){
-//            abstractResultBase.setDetailMessage(purGoodsOperateResult.getDetailMessage());
-//            abstractResultBase.setSuccess(false);
-//            return abstractResultBase;
-//        }
-//        // 插入单品
-//        PurGoodsSpecOperateResult purGoodsSpecOperateResult = purGoodsSpecService.batchCreate(purGoodsSpecList);
-//        if(!purGoodsSpecOperateResult.isSuccess()){
-//            abstractResultBase.setDetailMessage(purGoodsSpecOperateResult.getDetailMessage());
-//            abstractResultBase.setSuccess(false);
-//            return abstractResultBase;
-//        }
-//
-//        // 将商品推送到旺店通
-//        AbstractResultBase resultBase = goodsBatchPushToWdt(purGoodsList,goodsSpecMap);
-//        if(!resultBase.isSuccess()){
-//            abstractResultBase.setSuccess(false);
-//            abstractResultBase.setDetailMessage(resultBase.getDetailMessage());
-//            return abstractResultBase;
-//        }
-//
-//        return abstractResultBase;
-//    }
+
 }
