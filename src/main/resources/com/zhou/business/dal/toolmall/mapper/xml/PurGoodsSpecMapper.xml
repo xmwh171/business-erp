@@ -507,4 +507,50 @@
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByBarcode" resultMap="BaseResultMap">
+    select * from pur_goods_spec where barcode = #{barcode,jdbcType=VARCHAR} and enabled = 1
+  </select>
+
+  <select id="selectBySpecNoAndEnabled" resultMap="BaseResultMap">
+    select * from pur_goods_spec where spec_no = #{specNo,jdbcType=VARCHAR}
+    <if test="enabled!= null">
+      and enabled = #{enabled,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <insert id="batchSave" parameterType="java.util.List">
+    insert into pur_goods_spec (spec_no, spec_code,
+    barcode, spec_name, is_allow_neg_stock,
+    spec_unit_name, lowest_price, img_url,
+    retail_price, wholesale_price, member_price,
+    market_price, sale_score, pack_score,
+    pick_score, validity_days, weight,
+    length, width, height,
+    tax_rate, prop1, prop2,
+    prop3, prop4, prop5,
+    prop6, remark, sales_days,
+    receive_days, is_not_use_air, tax_number, is_prepare_stock,
+    goods_no, enabled, gmt_create,
+    gmt_modify
+    )
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.specNo}, #{item.specCode},
+      #{item.barcode}, #{item.specName}, #{item.isAllowNegStock},
+      #{item.specUnitName}, cast(#{item.lowestPrice} as decimal(19,4)), #{item.imgUrl},
+      cast(#{item.retailPrice} as decimal(19,4)), cast(#{item.wholesalePrice} as decimal(19,4)), cast(#{item.memberPrice} as decimal(19,4)),
+      cast(#{item.marketPrice} as decimal(19,4)), #{item.saleScore}, #{item.packScore},
+      #{item.pickScore}, #{item.validityDays}, cast(#{item.weight} as decimal(19,4)),
+      cast(#{item.length} as decimal(19,4)), cast(#{item.width} as decimal(19,4)), cast(#{item.height} as decimal(19,4)),
+      cast(#{item.taxRate} as decimal(19,4)), #{item.prop1}, #{item.prop2},
+      #{item.prop3}, #{item.prop4}, #{item.prop5},
+      #{item.prop6}, #{item.remark}, #{item.salesDays},
+      #{item.receiveDays}, #{item.isNotUseAir}, #{item.taxNumber},
+      #{item.isPrepareStock}, #{item.goodsNo}, 1, getdate(),getdate()
+      )
+    </foreach>
+  </insert>
+
 </mapper>

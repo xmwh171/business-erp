@@ -11,6 +11,7 @@ import com.zhou.business.wdtclient.result.WdtBaseResult;
 import com.zhou.business.wdtclient.result.WdtStockinOrderPushResult;
 import com.zhou.business.wdtclient.result.WdtStockoutOrderPushResult;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.Iterator;
@@ -26,6 +27,7 @@ import java.util.regex.PatternSyntaxException;
  * @Author xiaohu
  * @Date 2019/9/3 15:20
  */
+@Service
 public class WdtApiIntegration {
 
     @Autowired

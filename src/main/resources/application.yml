@@ -8,7 +8,7 @@ spring:
   businessDatasource:
     username: userfk
     password: userfk_ds2019
-    url: jdbc:sybase:Tds:192.168.100.203:5000/warehouse_sfd
+    url: jdbc:sybase:Tds:192.168.100.203:5000/warehouse_sfd?charset=cp936
     driver-class-name: com.sybase.jdbc3.jdbc.SybDriver
   toolMallDatasource:
     url: jdbc:sqlserver://10.254.183.55:1433;DatabaseName=toolmall-erp-test
@@ -31,6 +31,9 @@ wdt:
     appkey: tumao2-test
     appsecret: 12345
     wangdiantongurl: http://sandbox.wangdian.cn
+
+sqlServer:
+    parameterCount: 2000
 
 
 

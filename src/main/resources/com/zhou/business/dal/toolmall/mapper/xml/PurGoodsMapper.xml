@@ -319,4 +319,36 @@
       gmt_modify = #{gmtModify,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <select id="selectByGoodsNoAndEnabled" resultMap="BaseResultMap">
+    select * from pur_goods where goods_no = #{goodsNo,jdbcType=VARCHAR}
+    <if test="enabled!= null">
+      and enabled = #{enabled,jdbcType=INTEGER}
+    </if>
+  </select>
+
+  <insert id="batchSave" parameterType="java.util.List">
+    insert into pur_goods (goods_no, goods_name,
+    short_name, alias, goods_type,
+    pinyin, origin, class_name,
+    brand_name, brand_no, unit_name,
+    remark, props1, props2,
+    props3, props4, props5,
+    props6, enabled, gmt_create,
+    gmt_modify)
+    VALUES
+    <foreach collection="list" item="item" index="index" separator=",">
+      (
+      #{item.goodsNo}, #{item.goodsName},
+      #{item.shortName}, #{item.alias}, #{item.goodsType},
+      #{item.pinyin}, #{item.origin}, #{item.className},
+      #{item.brandName}, #{item.brandNo}, #{item.unitName},
+      #{item.remark}, #{item.props1}, #{item.props2},
+      #{item.props3}, #{item.props4}, #{item.props5},
+      #{item.props6}, 1, getdate(),getdate()
+      )
+    </foreach>
+  </insert>
+
+
 </mapper>

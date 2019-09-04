@@ -1,6 +1,8 @@
 package com.zhou.business.util;
 
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description
@@ -51,12 +53,20 @@ public class SybaseConnectionUtil {
 
             conn = DriverManager.getConnection(url, "userfk", "userfk_ds2019");
             stmt = conn.createStatement();
-            String sql = "select * from order_head_ds";
+            String sql = "select * from product_ds ";
             rs = stmt.executeQuery(sql);
             int i=1;
+            Map<String,Integer> map = new HashMap<>();
             while (rs.next()) {
-                System.out.println("(" + i++ + ")" + "OrderId:" + rs.getString("OrderId"));
+           //     System.out.println(rs.getString("ProId"));
+                Integer count = map.get(rs.getString("ProId"));
+                if(count != null){
+                    map.put(rs.getString("ProId"),++count);
+                }
+                map.put(rs.getString("ProId"),1);
+               // System.out.println("(" + i++ + ")" + "ProId:" + rs.getString("ProId"));
             }
+            System.out.println(map);
         } catch (InstantiationException e1) {
             e1.printStackTrace();
         } catch (IllegalAccessException e1) {

@@ -1,6 +1,9 @@
 package com.zhou.business.dal.toolmall.mapper;
 
 import com.zhou.business.dal.toolmall.entity.PurGoodsSpec;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface PurGoodsSpecMapper {
     /**
@@ -38,4 +41,11 @@ public interface PurGoodsSpecMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(PurGoodsSpec record);
+
+
+    PurGoodsSpec selectByBarcode(String barcode);
+
+    PurGoodsSpec selectBySpecNoAndEnabled(@Param("specNo")String specNo, @Param("enabled")Integer enabled);
+
+    void batchSave(List<PurGoodsSpec> purGoodsSpecList);
 }

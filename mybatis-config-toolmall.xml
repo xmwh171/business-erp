@@ -40,7 +40,16 @@
             <property name="enableSubPackages" value="true"/>
         </javaClientGenerator>
         <!--生成table 先建表 后生成 勿随意覆盖本身table 避免功能缺失  测试 自己找其他表测试 by zxm-->
-        <table tableName="wdt_stockout_order_trade_detail" domainObjectName="WdtStockoutOrderTradeDetail"
+        <table tableName="pur_goods_brand" domainObjectName="PurGoodsBrand"
+               enableCountByExample="false" enableUpdateByExample="false"
+               enableDeleteByExample="false" enableSelectByExample="false"
+               selectByExampleQueryId="false" enableInsert="true"
+               enableSelectByPrimaryKey="true" enableUpdateByPrimaryKey="true"
+               enableDeleteByPrimaryKey="true">
+            <generatedKey column="id" sqlStatement="SqlServer" identity="true"/>
+            <columnOverride column="enabled" javaType="boolean"/>
+        </table>
+        <table tableName="pur_goods_category" domainObjectName="PurGoodsCategory"
                enableCountByExample="false" enableUpdateByExample="false"
                enableDeleteByExample="false" enableSelectByExample="false"
                selectByExampleQueryId="false" enableInsert="true"
