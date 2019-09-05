@@ -2,6 +2,8 @@ package com.zhou.business.service.impl;
 
 import com.zhou.business.dal.toolmall.entity.WdtStockoutOrderTrade;
 import com.zhou.business.dal.toolmall.mapper.WdtStockoutOrderTradeMapper;
+import com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeSyncModel;
+import com.zhou.business.request.WdtStockoutOrderTradeSyncRequest;
 import com.zhou.business.service.WdtStockoutOrderTradeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,5 +25,10 @@ public class WdtStockoutOrderTradeServiceImpl implements WdtStockoutOrderTradeSe
     @Override
     public List<WdtStockoutOrderTrade> getByShopNoAndGmtCreate(String shopNo, Date startTime, Date endTime) {
         return wdtStockoutOrderTradeMapper.selectByShopNoAndGmtCreate(shopNo,startTime,endTime);
+    }
+
+    @Override
+    public List<WdtStockoutOrderTradeSyncModel> getBySyncRequest(WdtStockoutOrderTradeSyncRequest request) {
+        return wdtStockoutOrderTradeMapper.selectBySyncRequest(request);
     }
 }

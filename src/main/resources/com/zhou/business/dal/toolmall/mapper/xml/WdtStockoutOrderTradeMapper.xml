@@ -1148,4 +1148,35 @@
       and gmt_create &lt;= #{endTime,jdbcType=TIMESTAMP}
     </if>
   </select>
+
+  <resultMap id="WdtStockoutOrderTradeSyncModel" type="com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeSyncModel">
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="customer_no" jdbcType="VARCHAR" property="customerNo" />
+    <result column="modified" jdbcType="TIMESTAMP" property="modified" />
+    <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
+    <result column="stock_check_time" jdbcType="TIMESTAMP" property="stockCheckTime" />
+    <collection property="itemList" ofType="com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeDetailSyncModel" resultMap="WdtStockoutOrderTradeDetailSyncModel"/>
+  </resultMap>
+  <resultMap id="WdtStockoutOrderTradeDetailSyncModel" type="com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeDetailSyncModel">
+    <result column="spec_no" jdbcType="VARCHAR" property="specNo" />
+    <result column="goods_count" jdbcType="DECIMAL" property="goodsCount" />
+    <result column="sell_price" jdbcType="DECIMAL" property="sellPrice" />
+    <result column="tax_rate" jdbcType="DECIMAL" property="taxRate" />
+    <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
+  </resultMap>
+  <select id="selectBySyncRequest" parameterType="com.zhou.business.request.WdtStockoutOrderTradeSyncRequest" resultMap="WdtStockoutOrderTradeSyncModel">
+    select a.order_no,a.customer_no,a.modified,a.pay_time,a.stock_check_time,b.spec_no,b.goods_count,b.sell_price,b.tax_rate,b.cost_price
+    from wdt_stockout_order_trade a left join wdt_stockout_order_trade_detail b on a.stockout_id = b.stockout_id
+    where a.enabled=1 and b.enabled=1 and a.warehouse_no in
+    <foreach collection="warehouseNoList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    <if test="startTime != null ">
+      and a.gmt_modify &gt;= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null ">
+      and a.gmt_modify &lt; #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
 </mapper>

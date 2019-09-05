@@ -1,6 +1,8 @@
 package com.zhou.business.dal.toolmall.mapper;
 
 import com.zhou.business.dal.toolmall.entity.WdtStockoutOrderTrade;
+import com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeSyncModel;
+import com.zhou.business.request.WdtStockoutOrderTradeSyncRequest;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Date;
@@ -45,4 +47,9 @@ public interface WdtStockoutOrderTradeMapper {
 
 
     List<WdtStockoutOrderTrade> selectByShopNoAndGmtCreate(@Param("shopNo")String shopNo, @Param("startTime")Date startTime, @Param("endTime")Date endTime);
+
+    List<WdtStockoutOrderTradeSyncModel> selectBySyncRequest(WdtStockoutOrderTradeSyncRequest request);
+
+
+
 }

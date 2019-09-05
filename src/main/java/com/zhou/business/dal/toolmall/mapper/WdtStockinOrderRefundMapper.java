@@ -1,6 +1,10 @@
 package com.zhou.business.dal.toolmall.mapper;
 
 import com.zhou.business.dal.toolmall.entity.WdtStockinOrderRefund;
+import com.zhou.business.dal.toolmall.model.WdtStockinOrderRefundSyncModel;
+import com.zhou.business.request.WdtStockinOrderRefundSyncRequest;
+
+import java.util.List;
 
 public interface WdtStockinOrderRefundMapper {
     /**
@@ -38,4 +42,11 @@ public interface WdtStockinOrderRefundMapper {
      * @mbggenerated
      */
     int updateByPrimaryKey(WdtStockinOrderRefund record);
+
+    /**
+     *
+     * @param syncRequest
+     * @return
+     */
+    List<WdtStockinOrderRefundSyncModel> selectBySyncRequest(WdtStockinOrderRefundSyncRequest syncRequest);
 }

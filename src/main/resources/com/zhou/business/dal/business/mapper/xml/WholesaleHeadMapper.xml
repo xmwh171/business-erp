@@ -241,4 +241,31 @@
       shflag = #{shflag,jdbcType=CHAR}
     where wholesaleid = #{wholesaleid,jdbcType=VARCHAR}
   </update>
+
+  <insert id="batchSave" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="
+     ">
+      insert into wholesale_head (wholesaleid, whid, inputdate,
+      flag, clientid, operatorid,
+      remarks, updatedate, status,
+      payflag, invoiceflag, paydate,
+      invoicedate, shdate, shflag)
+      VALUES
+      (
+      #{item.wholesaleid,jdbcType=VARCHAR}, #{item.whid,jdbcType=VARCHAR}, #{item.inputdate,jdbcType=TIMESTAMP},
+      #{item.flag,jdbcType=CHAR}, #{item.clientid,jdbcType=CHAR}, #{item.operatorid,jdbcType=VARCHAR},
+      #{item.remarks,jdbcType=VARCHAR}, #{item.updatedate,jdbcType=TIMESTAMP}, #{item.status,jdbcType=CHAR},
+      #{item.payflag,jdbcType=CHAR}, #{item.invoiceflag,jdbcType=CHAR}, #{item.paydate,jdbcType=TIMESTAMP},
+      #{item.invoicedate,jdbcType=TIMESTAMP}, #{item.shdate,jdbcType=TIMESTAMP}, #{item.shflag,jdbcType=CHAR}
+      )
+    </foreach>
+  </insert>
+
+  <select id="selectWholesaleidsByWholesaleids" parameterType="java.util.List" resultType="java.lang.String">
+    select wholesaleid from wholesale_head where wholesaleid in
+    <foreach close=")" collection="list" index="index" item="item" open="(" separator=",">
+      #{item}
+    </foreach>
+  </select>
+
 </mapper>

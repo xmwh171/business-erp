@@ -1,13 +1,41 @@
 package com.zhou.business.util;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import org.apache.commons.collections4.CollectionUtils;
 
 
 /**
  *
  */
 public class ListUtils {
+
+    public static <T> List<T> toList(T... ts) {
+        if (ts == null) {
+            return new ArrayList<T>(0);
+        }
+        List<T> retList = new ArrayList<T>();
+        CollectionUtils.addAll(retList, ts);
+        return retList;
+    }
+
+    public static  List<Object> toObjectList(List<String> list) {
+        if (list == null) {
+            return new ArrayList<Object>(0);
+        }
+        List<Object> retList = new ArrayList<Object>();
+        CollectionUtils.addAll(retList, list);
+        return retList;
+    }
+    /**
+     * 返回一个新集合
+     *
+     * @return
+     */
+    public static final <T> List<T> newList(Collection<T> collections) {
+        return new ArrayList<T>(collections);
+    }
 
 
     /**

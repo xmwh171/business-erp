@@ -53,11 +53,14 @@ public class SybaseConnectionUtil {
 
             conn = DriverManager.getConnection(url, "userfk", "userfk_ds2019");
             stmt = conn.createStatement();
-            String sql = "select * from product_ds ";
+            String sql = "select * from order_head_ds ";
             rs = stmt.executeQuery(sql);
             int i=1;
             while (rs.next()) {
-                System.out.println("(" + i++ + ")" + "UpdateDate:" + rs.getString("UpdateDate"));
+                System.out.println("(" + i + ")" + "OrderType:" + rs.getString("OrderType"));
+                System.out.println("(" + i + ")" + "ReceiptDate:" + rs.getString("ReceiptDate"));
+                System.out.println("(" + i + ")" + "updatedate:" + rs.getString("updatedate"));
+                i++;
             }
 
 //            Map<String,Integer> map = new HashMap<>();

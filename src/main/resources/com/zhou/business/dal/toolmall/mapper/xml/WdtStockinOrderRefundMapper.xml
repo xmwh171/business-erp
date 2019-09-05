@@ -568,4 +568,35 @@
       enabled = #{enabled,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
   </update>
+
+  <resultMap id="WdtStockinOrderRefundSyncModel" type="com.zhou.business.dal.toolmall.model.WdtStockinOrderRefundSyncModel">
+    <result column="order_no" jdbcType="VARCHAR" property="orderNo" />
+    <result column="customer_no" jdbcType="VARCHAR" property="customerNo" />
+    <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
+    <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <collection property="itemList" ofType="com.zhou.business.dal.toolmall.model.WdtStockinOrderRefundDetailSyncModel" resultMap="WdtStockinOrderRefundDetailSyncModel"/>
+  </resultMap>
+  <resultMap id="WdtStockinOrderRefundDetailSyncModel" type="com.zhou.business.dal.toolmall.model.WdtStockinOrderRefundDetailSyncModel">
+    <result column="spec_no" jdbcType="VARCHAR" property="specNo" />
+    <result column="goods_count" jdbcType="DECIMAL" property="goodsCount" />
+    <result column="src_price" jdbcType="DECIMAL" property="srcPrice" />
+    <result column="tax" jdbcType="DECIMAL" property="tax" />
+    <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
+  </resultMap>
+  <select id="selectBySyncRequest" parameterType="com.zhou.business.request.WdtStockoutOrderTradeSyncRequest" resultMap="WdtStockinOrderRefundSyncModel">
+    select a.order_no,a.customer_no,a.gmt_modify,a.check_time,b.spec_no,b.goods_count,b.src_price,b.tax,b.cost_price
+    from wdt_stockin_order_refund a left join wdt_stockin_order_refund_detail b on a.stockin_id = b.stockin_id
+    where a.enabled=1 and b.enabled=1 and a.warehouse_no in
+    <foreach collection="warehouseNoList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    <if test="startTime != null ">
+      and a.gmt_modify &gt;= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null ">
+      and a.gmt_modify &lt; #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
+
 </mapper>

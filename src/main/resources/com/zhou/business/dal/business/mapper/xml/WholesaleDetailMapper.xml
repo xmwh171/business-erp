@@ -206,4 +206,27 @@
     where wholesaleid = #{wholesaleid,jdbcType=VARCHAR}
       and proid = #{proid,jdbcType=VARCHAR}
   </update>
+
+  <insert id="batchSave" parameterType="java.util.List">
+    <foreach collection="list" item="item" index="index" separator="
+    ">
+      insert into wholesale_detail (wholesaleid, proid, seatid,
+      saleqty, saleprice, saletax,
+      costprice, packetqty, boxqty,
+      flowid, frprice, exrate)
+      VALUES
+      (
+      #{item.wholesaleid,jdbcType=VARCHAR}, #{item.proid,jdbcType=VARCHAR}, #{item.seatid,jdbcType=VARCHAR},
+      #{item.saleqty,jdbcType=NUMERIC}, #{item.saleprice,jdbcType=NUMERIC}, #{item.saletax,jdbcType=NUMERIC},
+      #{item.costprice,jdbcType=NUMERIC}, #{item.packetqty,jdbcType=NUMERIC}, #{item.boxqty,jdbcType=NUMERIC},
+      #{item.flowid,jdbcType=INTEGER}, #{item.frprice,jdbcType=DECIMAL}, #{item.exrate,jdbcType=DECIMAL}
+      )
+    </foreach>
+  </insert>
+
+  <select id="selectByWholesaleidAndProid" resultMap="BaseResultMap">
+    select <include refid="Base_Column_List" /> from wholesale_detail
+    where wholesaleid = #{wholesaleid,jdbcType=VARCHAR} and proid = #{proid,jdbcType=VARCHAR}
+  </select>
+
 </mapper>

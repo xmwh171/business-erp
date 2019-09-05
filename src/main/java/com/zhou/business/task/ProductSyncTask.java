@@ -21,7 +21,7 @@ import java.util.List;
  */
 @Slf4j
 @Component
-public class GoodsSyncTask {
+public class ProductSyncTask {
 
     @Autowired
     private BusSyncConfigService busSyncConfigService;
@@ -30,19 +30,19 @@ public class GoodsSyncTask {
     private ProductDsService productDsService;
 
     @Scheduled(cron = "0 0/2 * ? * ?")
-    private void goodsSync() {
+    private void execute() {
 
-        BusSyncConfig invSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.BUSINESS_GOODS_SYNC.code());
-        if(invSyncConfig == null){
+        BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.BUSINESS_PRODUCT_SYNC.code());
+        if(busSyncConfig == null){
             return;
         }
-        Date startTime = invSyncConfig.getGmtNextSync();
+        Date startTime = busSyncConfig.getGmtNextSync();
         Date endTime = new Date();
         List<ProductDs> productDsList = productDsService.getByUpdateDate(startTime,endTime);
         if(productDsList.size()>0){
             SyncResult syncResult = productDsService.pushToWdt(productDsList);
             if(syncResult.isSuccess()){
-                busSyncConfigService.modifyGmtNextSyncByCode(syncResult.getMaxModifyDate(),BusSyncConfigEnum.BUSINESS_GOODS_SYNC.code());
+                busSyncConfigService.modifyGmtNextSyncByCode(syncResult.getMaxModifyDate(),BusSyncConfigEnum.BUSINESS_PRODUCT_SYNC.code());
             }else {
                 log.error("商务系统商品同步错误，原因："+syncResult.getDetailMessage());
             }
