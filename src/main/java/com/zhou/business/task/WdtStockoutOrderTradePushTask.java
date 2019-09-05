@@ -38,7 +38,7 @@ public class WdtStockoutOrderTradePushTask {
     @Scheduled(cron = "0 0/2 * ? * ?")
     private void execute() {
 
-        BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.WDT_STOCKSOUT_ORDER_SYNC.code());
+        BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.WDT_STOCKOUT_ORDER_SYNC.code());
         if(busSyncConfig == null){
             return;
         }
@@ -58,12 +58,12 @@ public class WdtStockoutOrderTradePushTask {
         syncRequest.setWarehouseNoList(warehouseNoList);
         List<WdtStockoutOrderTradeSyncModel> syncModelList = wdtStockoutOrderTradeService.getBySyncRequest(syncRequest);
         if(syncModelList.size() == 0){
-            busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKSOUT_ORDER_SYNC.code());
+            busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKOUT_ORDER_SYNC.code());
             return;
         }
         SyncResult syncResult = wholeHeadService.stockoutOrderTradeSync(syncModelList);
         if(syncResult.isSuccess()){
-            busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKSOUT_ORDER_SYNC.code());
+            busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKOUT_ORDER_SYNC.code());
         }else {
             log.error("旺店通销售出库单同步至商务销售订单错误，原因："+syncResult.getDetailMessage());
         }

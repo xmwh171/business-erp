@@ -91,7 +91,7 @@ public class WdtApiIntegration {
      * @param wdtStockinOrder
      * @return
      */
-    public WdtStockinOrderPushResult stockinOrderPush(WdtStockinOrder wdtStockinOrder) throws IOException {
+    public WdtStockinOrderPushResult stockinOrderPush(WdtStockinOrder wdtStockinOrder){
         WdtStockinOrderPushResult pushResult = new WdtStockinOrderPushResult();
         TreeMap<String, String> paramsMap = new TreeMap<String, String>();
         paramsMap.put("sid", wdtConfig.getSid());
@@ -130,7 +130,7 @@ public class WdtApiIntegration {
      * @param wdtStockoutOrderInfo
      * @return
      */
-    public WdtStockoutOrderPushResult stockoutOrderPush(WdtStockoutOrderInfo wdtStockoutOrderInfo) throws IOException {
+    public WdtStockoutOrderPushResult stockoutOrderPush(WdtStockoutOrderInfo wdtStockoutOrderInfo){
         WdtStockoutOrderPushResult pushResult = new WdtStockoutOrderPushResult();
         TreeMap<String, String> paramsMap = new TreeMap<String, String>();
         paramsMap.put("sid", wdtConfig.getSid());

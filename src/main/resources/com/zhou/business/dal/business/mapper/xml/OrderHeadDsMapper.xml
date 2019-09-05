@@ -175,4 +175,73 @@
   <select id="selectByOrderId" resultMap="BaseResultMap">
     select * from order_head_ds where OrderId =  #{orderid,jdbcType=VARCHAR}
   </select>
+
+  <resultMap id="BusinessOrderSyncModel" type="com.zhou.business.dal.business.model.BusinessOrderSyncModel">
+    <result column="OrderId" jdbcType="VARCHAR" property="orderid" />
+    <result column="InputDate" jdbcType="TIMESTAMP" property="inputdate" />
+    <result column="BraId" jdbcType="VARCHAR" property="braid" />
+    <result column="SupId" jdbcType="VARCHAR" property="supid" />
+    <result column="OrderType" jdbcType="CHAR" property="ordertype" />
+    <result column="OrderMode" jdbcType="CHAR" property="ordermode" />
+    <result column="DMId" jdbcType="VARCHAR" property="dmid" />
+    <result column="PreReceiptDate" jdbcType="TIMESTAMP" property="prereceiptdate" />
+    <result column="EndDate" jdbcType="TIMESTAMP" property="enddate" />
+    <result column="Status" jdbcType="CHAR" property="status" />
+    <result column="Status1" jdbcType="CHAR" property="status1" />
+    <result column="ReceiptDate" jdbcType="TIMESTAMP" property="receiptdate" />
+    <result column="ReceiptId" jdbcType="VARCHAR" property="receiptid" />
+    <result column="ManagerId" jdbcType="VARCHAR" property="managerid" />
+    <result column="OperatorId" jdbcType="VARCHAR" property="operatorid" />
+    <result column="Remark" jdbcType="VARCHAR" property="remark" />
+    <result column="updatedate" jdbcType="TIMESTAMP" property="updatedate" />
+    <result column="payableflag" jdbcType="CHAR" property="payableflag" />
+    <result column="currencytype" jdbcType="CHAR" property="currencytype" />
+    <collection property="itemList" ofType="com.zhou.business.dal.business.entity.OrderDetailDs" resultMap="OrderDetailDs"/>
+  </resultMap>
+  <resultMap id="OrderDetailDs" type="com.zhou.business.dal.business.entity.OrderDetailDs">
+    <result column="itemOrderId" jdbcType="VARCHAR" property="orderid" />
+    <result column="ProId" jdbcType="VARCHAR" property="proid" />
+    <result column="classid" jdbcType="VARCHAR" property="classid" />
+    <result column="normalprice" jdbcType="NUMERIC" property="normalprice" />
+    <result column="UnitId" jdbcType="VARCHAR" property="unitid" />
+    <result column="OrderQty" jdbcType="NUMERIC" property="orderqty" />
+    <result column="OrderPrice" jdbcType="NUMERIC" property="orderprice" />
+    <result column="GifQty" jdbcType="NUMERIC" property="gifqty" />
+    <result column="OrderTax" jdbcType="NUMERIC" property="ordertax" />
+    <result column="SupplierQty" jdbcType="NUMERIC" property="supplierqty" />
+    <result column="ReceiptQty" jdbcType="NUMERIC" property="receiptqty" />
+    <result column="ReceiptPrice" jdbcType="NUMERIC" property="receiptprice" />
+    <result column="ReceiptGifQty" jdbcType="NUMERIC" property="receiptgifqty" />
+    <result column="ReceiptTax" jdbcType="NUMERIC" property="receipttax" />
+    <result column="ReceiptAmt" jdbcType="NUMERIC" property="receiptamt" />
+    <result column="PacketQty" jdbcType="NUMERIC" property="packetqty" />
+    <result column="ProductDate" jdbcType="TIMESTAMP" property="productdate" />
+    <result column="WarrantyDate" jdbcType="TIMESTAMP" property="warrantydate" />
+    <result column="MinOrderQty" jdbcType="NUMERIC" property="minorderqty" />
+    <result column="OrderMultiplier" jdbcType="NUMERIC" property="ordermultiplier" />
+    <result column="BoxCode" jdbcType="VARCHAR" property="boxcode" />
+    <result column="FLowId" jdbcType="INTEGER" property="flowid" />
+    <result column="impost" jdbcType="NUMERIC" property="impost" />
+    <result column="addedtax" jdbcType="NUMERIC" property="addedtax" />
+    <result column="excisetax" jdbcType="NUMERIC" property="excisetax" />
+    <result column="exrate" jdbcType="NUMERIC" property="exrate" />
+    <result column="frprice" jdbcType="NUMERIC" property="frprice" />
+  </resultMap>
+  <select id="selectBySyncRequest" parameterType="com.zhou.business.request.BusinessOrderSyncRequest" resultMap="BusinessOrderSyncModel">
+    select a.OrderId, a.InputDate, a.BraId, a.SupId, a.OrderType, a.OrderMode, a.DMId, a.PreReceiptDate, a.EndDate, a.Status, a.Status1, a.ReceiptDate,
+    a.ReceiptId, a.ManagerId, a.OperatorId, a.Remark, a.updatedate, a.payableflag, a.currencytype, b.OrderId as itemOrderId, b.ProId, b.classid, b.normalprice,
+    b.UnitId, b.OrderQty, b.OrderPrice, b.GifQty, b.OrderTax, b.SupplierQty, b.ReceiptQty, b.ReceiptPrice, b.ReceiptGifQty, b.ReceiptTax, b.ReceiptAmt, b.PacketQty,
+    b.ProductDate, b.WarrantyDate, b.MinOrderQty, b.OrderMultiplier, b.BoxCode, b.FLowId, b.impost, b.addedtax, b.excisetax, b.exrate, b.frprice
+    from order_head_ds a left join order_detail_ds b on a.OrderId=b.OrderId where a.status = #{status,jdbcType=CHAR} and OrderType in
+    <foreach collection="orderTypeList" item="item" index="index" open="(" close=")" separator=",">
+      #{item}
+    </foreach>
+    <if test="startTime != null ">
+      and a.updatedate &gt;= #{startTime,jdbcType=TIMESTAMP}
+    </if>
+    <if test="endTime != null ">
+      and a.updatedate &lt; #{endTime,jdbcType=TIMESTAMP}
+    </if>
+  </select>
+
 </mapper>
