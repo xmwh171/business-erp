@@ -1,0 +1,23 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+  businessDatasource:
+    username: userfk
+    password: userfk_ds2019
+    url: jdbc:sybase:Tds:192.168.100.203:5000/warehouse_sfd?charset=cp936
+    driver-class-name: com.sybase.jdbc3.jdbc.SybDriver
+  toolMallDatasource:
+    url: jdbc:sqlserver://10.2.0.10:1433;DatabaseName=toolmall-erp
+    username: sa
+    password: Bp133ls4
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+wdt:
+    sid: tumao2
+    appkey: tumao2-gw
+    appsecret: 25491416c9c3e881ca13f658a28a628b
+    wangdiantongurl: http://api.wangdian.cn
+
