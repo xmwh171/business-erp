@@ -232,15 +232,15 @@
     a.ReceiptId, a.ManagerId, a.OperatorId, a.Remark, a.updatedate, a.payableflag, a.currencytype, b.OrderId as itemOrderId, b.ProId, b.classid, b.normalprice,
     b.UnitId, b.OrderQty, b.OrderPrice, b.GifQty, b.OrderTax, b.SupplierQty, b.ReceiptQty, b.ReceiptPrice, b.ReceiptGifQty, b.ReceiptTax, b.ReceiptAmt, b.PacketQty,
     b.ProductDate, b.WarrantyDate, b.MinOrderQty, b.OrderMultiplier, b.BoxCode, b.FLowId, b.impost, b.addedtax, b.excisetax, b.exrate, b.frprice
-    from order_head_ds a left join order_detail_ds b on a.OrderId=b.OrderId where a.status = #{status,jdbcType=CHAR} and OrderType in
+    from order_head_ds a left join order_detail_ds b on a.OrderId=b.OrderId where a.status = #{status,jdbcType=CHAR} and a.OrderType in
     <foreach collection="orderTypeList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
     </foreach>
     <if test="startTime != null ">
-      and a.updatedate &gt;= #{startTime,jdbcType=TIMESTAMP}
+      and a.ReceiptDate &gt;= #{startTime,jdbcType=TIMESTAMP}
     </if>
     <if test="endTime != null ">
-      and a.updatedate &lt; #{endTime,jdbcType=TIMESTAMP}
+      and a.ReceiptDate &lt; #{endTime,jdbcType=TIMESTAMP}
     </if>
   </select>
 
