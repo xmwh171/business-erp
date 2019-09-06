@@ -104,7 +104,7 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
             }
             wdtStockoutOrderInfo.setDetail_list(orderItemList);
             WdtStockoutOrderPushResult pushResult = wdtApiIntegration.stockoutOrderPush(wdtStockoutOrderInfo);
-            if(!pushResult.isSuccess()){
+            if(!pushResult.isSuccess() && pushResult.getCode()!=2350){
                 syncResult.setSuccess(false);
                 syncResult.setDetailMessage(pushResult.getMessage());
                 return syncResult;

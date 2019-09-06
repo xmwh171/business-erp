@@ -417,7 +417,7 @@
   </insert>
 
   <select id="selectByUpdateDate" resultMap="BaseResultMap">
-     select * from product_ds where UpdateDate &gt;= #{startTime,jdbcType=TIMESTAMP} and UpdateDate &lt; #{endTime,jdbcType=TIMESTAMP}
+     select * from product_ds where UpdateDate &gt; #{startTime,jdbcType=TIMESTAMP} and UpdateDate &lt;= #{endTime,jdbcType=TIMESTAMP}
   </select>
 
   <select id="selectByProId" resultMap="BaseResultMap">

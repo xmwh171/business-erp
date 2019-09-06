@@ -237,10 +237,10 @@
       #{item}
     </foreach>
     <if test="startTime != null ">
-      and a.ReceiptDate &gt;= #{startTime,jdbcType=TIMESTAMP}
+      and a.ReceiptDate &gt; #{startTime,jdbcType=TIMESTAMP}
     </if>
     <if test="endTime != null ">
-      and a.ReceiptDate &lt; #{endTime,jdbcType=TIMESTAMP}
+      and a.ReceiptDate &lt;= #{endTime,jdbcType=TIMESTAMP}
     </if>
   </select>
 
