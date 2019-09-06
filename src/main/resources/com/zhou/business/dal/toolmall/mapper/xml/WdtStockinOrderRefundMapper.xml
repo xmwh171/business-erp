@@ -586,8 +586,8 @@
   <select id="selectBySyncRequest" parameterType="com.zhou.business.request.WdtStockoutOrderTradeSyncRequest" resultMap="WdtStockinOrderRefundSyncModel">
     select a.order_no,a.customer_no,a.gmt_modify,a.check_time,b.spec_no,b.goods_count,b.src_price,b.tax,b.cost_price
     from wdt_stockin_order_refund a left join wdt_stockin_order_refund_detail b on a.stockin_id = b.stockin_id
-    where a.enabled=1 and b.enabled=1 and a.warehouse_no in
-    <foreach collection="warehouseNoList" item="item" index="index" open="(" close=")" separator=",">
+    where a.enabled=1 and b.enabled=1 and a.shop_no in
+    <foreach collection="shopNoList" item="item" index="index" open="(" close=")" separator=",">
       #{item}
     </foreach>
     <if test="startTime != null ">

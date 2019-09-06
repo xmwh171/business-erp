@@ -16,9 +16,9 @@ import com.zhou.business.wdtclient.result.WdtStockinOrderPushResult;
 import com.zhou.business.wdtclient.result.WdtStockoutOrderPushResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,6 +37,9 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
 
     @Autowired
     private WdtApiIntegration wdtApiIntegration;
+
+    @Value("${wdt.xfd-purchase-warehouseNo}")
+    private String warehouseNo;
 
     @Override
     public OrderHeadDs getByOrderId(String orderId) {
@@ -59,7 +62,7 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
             }
             WdtStockinOrder wdtStockinOrder = new WdtStockinOrder();
             wdtStockinOrder.setOuter_no(syncModel.getOrderid());
-            wdtStockinOrder.setWarehouse_no("tumao2-test");
+            wdtStockinOrder.setWarehouse_no(warehouseNo);
             wdtStockinOrder.setRemark(syncModel.getRemark());
             List<WdtStockinOrderItem> goodsList = new ArrayList<>();
             for(OrderDetailDs orderDetailDs : syncModel.getItemList()){
@@ -93,7 +96,7 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
             }
             WdtStockoutOrderInfo wdtStockoutOrderInfo = new WdtStockoutOrderInfo();
             wdtStockoutOrderInfo.setOuter_no(syncModel.getOrderid());
-            wdtStockoutOrderInfo.setWarehouse_no("tumao2-test");
+            wdtStockoutOrderInfo.setWarehouse_no(warehouseNo);
             List<WdtStockoutOrderItem> orderItemList = new ArrayList<>();
             for(OrderDetailDs orderDetailDs : syncModel.getItemList()){
                 WdtStockoutOrderItem wdtStockoutOrderItem = new WdtStockoutOrderItem();

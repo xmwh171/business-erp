@@ -31,7 +31,7 @@ public class SalesOrderSyncToWdtStockoutTask {
     @Autowired
     private OrderHeadDsService orderHeadDsService;
 
-    @Scheduled(cron = "0 0/3 * ? * ?")
+    @Scheduled(cron = "0 0/30 * ? * ?")
     private void execute() {
 
         BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.BUSINESS_ORDER_SYNC_TO_WDT_STOCKOUT.code());

@@ -21,9 +21,9 @@ public class WdtStockoutOrderTradeSyncRequest {
     private Date endTime;
 
     /**
-     * 仓库编号集合
+     * 店铺编号集合
      */
-    private List<String> warehouseNoList;
+    private List<String> shopNoList;
 
     public Date getStartTime() {
         return startTime;
@@ -41,11 +41,11 @@ public class WdtStockoutOrderTradeSyncRequest {
         this.endTime = endTime;
     }
 
-    public List<String> getWarehouseNoList() {
-        return warehouseNoList;
+    public List<String> getShopNoList() {
+        return shopNoList;
     }
 
-    public void setWarehouseNoList(List<String> warehouseNoList) {
-        this.warehouseNoList = warehouseNoList;
+    public void setShopNoList(List<String> shopNoList) {
+        this.shopNoList = shopNoList;
     }
 }

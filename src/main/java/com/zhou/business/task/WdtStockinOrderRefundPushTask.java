@@ -39,7 +39,7 @@ public class WdtStockinOrderRefundPushTask {
     @Autowired
     private WholeHeadService wholeHeadService;
 
-    @Scheduled(cron = "0 0/2 * ? * ?")
+    @Scheduled(cron = "0 0/30 * ? * ?")
     private void execute() {
 
         BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.WDT_STOCKIN_ORDER_REFUND_SYNC.code());
@@ -47,19 +47,19 @@ public class WdtStockinOrderRefundPushTask {
             return;
         }
         WdtStockinOrderRefundSyncRequest syncRequest = new WdtStockinOrderRefundSyncRequest();
-        List<String> warehouseNoList = new ArrayList<>();
+        List<String> shopNoList = new ArrayList<>();
         String properties = busSyncConfig.getProperties();
         Map<String, String> propertiesMap = new HashMap<>();
         if(StringUtils.notEmpty(properties)){
             propertiesMap = BusSyncConfig.parseProperties(properties);
         }
-        String warehouseNos = propertiesMap.get("warehouse_no");
-        if(StringUtils.notEmpty(warehouseNos)){
-            warehouseNoList.addAll(ListUtils.toList(StringUtils.split(warehouseNos,"、")));
+        String shopNos = propertiesMap.get("shop_no");
+        if(StringUtils.notEmpty(shopNos)){
+            shopNoList.addAll(ListUtils.toList(StringUtils.split(shopNos,"、")));
         }
         syncRequest.setStartTime(busSyncConfig.getGmtNextSync());
         syncRequest.setEndTime(new Date());
-        syncRequest.setWarehouseNoList(warehouseNoList);
+        syncRequest.setShopNoList(shopNoList);
         List<WdtStockinOrderRefundSyncModel> syncModelList = wdtStockinOrderRefundService.getBySyncRequest(syncRequest);
         if(syncModelList.size() == 0){
             busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKIN_ORDER_REFUND_SYNC.code());
