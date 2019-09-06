@@ -59,7 +59,7 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
             }
             WdtStockinOrder wdtStockinOrder = new WdtStockinOrder();
             wdtStockinOrder.setOuter_no(syncModel.getOrderid());
-            wdtStockinOrder.setWarehouse_no("");
+            wdtStockinOrder.setWarehouse_no("tumao2-test");
             wdtStockinOrder.setRemark(syncModel.getRemark());
             List<WdtStockinOrderItem> goodsList = new ArrayList<>();
             for(OrderDetailDs orderDetailDs : syncModel.getItemList()){
@@ -72,7 +72,7 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
             }
             wdtStockinOrder.setGoods_list(goodsList);
             WdtStockinOrderPushResult pushResult = wdtApiIntegration.stockinOrderPush(wdtStockinOrder);
-            if(pushResult.isSuccess()){
+            if(!pushResult.isSuccess() && pushResult.getCode()!=2350){
                 syncResult.setSuccess(false);
                 syncResult.setDetailMessage(pushResult.getMessage());
                 return syncResult;
@@ -93,7 +93,7 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
             }
             WdtStockoutOrderInfo wdtStockoutOrderInfo = new WdtStockoutOrderInfo();
             wdtStockoutOrderInfo.setOuter_no(syncModel.getOrderid());
-            wdtStockoutOrderInfo.setWarehouse_no("");
+            wdtStockoutOrderInfo.setWarehouse_no("tumao2-test");
             List<WdtStockoutOrderItem> orderItemList = new ArrayList<>();
             for(OrderDetailDs orderDetailDs : syncModel.getItemList()){
                 WdtStockoutOrderItem wdtStockoutOrderItem = new WdtStockoutOrderItem();
@@ -104,7 +104,7 @@ public class OrderHeadDsServiceImpl implements OrderHeadDsService {
             }
             wdtStockoutOrderInfo.setDetail_list(orderItemList);
             WdtStockoutOrderPushResult pushResult = wdtApiIntegration.stockoutOrderPush(wdtStockoutOrderInfo);
-            if(pushResult.isSuccess()){
+            if(!pushResult.isSuccess()){
                 syncResult.setSuccess(false);
                 syncResult.setDetailMessage(pushResult.getMessage());
                 return syncResult;

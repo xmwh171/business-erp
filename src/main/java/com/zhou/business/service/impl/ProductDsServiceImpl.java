@@ -76,15 +76,11 @@ public class ProductDsServiceImpl implements ProductDsService {
             wdtGoodsPushInfo.setGoods_type(1);
             wdtGoodsPushInfo.setGoods_no(productDs.getProid());
             wdtGoodsPushInfo.setGoods_name(productDs.getProsname());
-            // 默认分类名称
-            wdtGoodsPushInfo.setClass_name("");
+            // 默认分类名称 : XFD--商品类目
+            wdtGoodsPushInfo.setClass_name("XFD--商品类目");
             // 默认品牌名：谢菲德
             wdtGoodsPushInfo.setBrand_name("谢菲德");
             List<WdtGoodsSpecPushInfo> spec_list = new ArrayList<>();
-//            wdtGoodsSpecPushInfo.setIs_allow_neg_stock(productDs.getIsAllowNegStock());
-//            wdtGoodsSpecPushInfo.setLowest_price(productDs.getLowestPrice());
-//            wdtGoodsSpecPushInfo.setMarket_price(productDs.getMarketPrice());
-//            wdtGoodsSpecPushInfo.setTax_rate();
             WdtGoodsSpecPushInfo wdtGoodsSpecPushInfo = new WdtGoodsSpecPushInfo();
             wdtGoodsSpecPushInfo.setBarcode(productDs.getProid());
             wdtGoodsSpecPushInfo.setHeight(productDs.getHeight());
