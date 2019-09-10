@@ -2,15 +2,12 @@ package com.zhou.business.task;
 
 import com.zhou.business.dal.toolmall.entity.BusSyncConfig;
 import com.zhou.business.dal.toolmall.model.WdtStockinOrderRefundSyncModel;
-import com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeSyncModel;
 import com.zhou.business.enums.BusSyncConfigEnum;
 import com.zhou.business.request.WdtStockinOrderRefundSyncRequest;
-import com.zhou.business.request.WdtStockoutOrderTradeSyncRequest;
 import com.zhou.business.result.SyncResult;
 import com.zhou.business.service.BusSyncConfigService;
 import com.zhou.business.service.WdtStockinOrderRefundService;
-import com.zhou.business.service.WdtStockoutOrderTradeService;
-import com.zhou.business.service.WholeHeadService;
+import com.zhou.business.service.WholeHeadDsService;
 import com.zhou.business.util.ListUtils;
 import com.zhou.business.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -37,9 +34,9 @@ public class WdtStockinOrderRefundPushTask {
     private WdtStockinOrderRefundService wdtStockinOrderRefundService;
 
     @Autowired
-    private WholeHeadService wholeHeadService;
+    private WholeHeadDsService wholeHeadDsService;
 
-    @Scheduled(cron = "0 0/30 * ? * ?")
+    @Scheduled(cron = "0 0/2 * ? * ?")
     private void execute() {
 
         BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.WDT_STOCKIN_ORDER_REFUND_SYNC.code());
@@ -65,7 +62,7 @@ public class WdtStockinOrderRefundPushTask {
             busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKIN_ORDER_REFUND_SYNC.code());
             return;
         }
-        SyncResult syncResult = wholeHeadService.stockinOrderRefundSync(syncModelList);
+        SyncResult syncResult = wholeHeadDsService.stockinOrderRefundSync(syncModelList);
         if(syncResult.isSuccess()){
             busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKIN_ORDER_REFUND_SYNC.code());
         }else {

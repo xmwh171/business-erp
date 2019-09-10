@@ -7,7 +7,7 @@ import com.zhou.business.request.WdtStockoutOrderTradeSyncRequest;
 import com.zhou.business.result.SyncResult;
 import com.zhou.business.service.BusSyncConfigService;
 import com.zhou.business.service.WdtStockoutOrderTradeService;
-import com.zhou.business.service.WholeHeadService;
+import com.zhou.business.service.WholeHeadDsService;
 import com.zhou.business.util.ListUtils;
 import com.zhou.business.util.StringUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -33,9 +33,9 @@ public class WdtStockoutOrderTradePushTask {
     private WdtStockoutOrderTradeService wdtStockoutOrderTradeService;
 
     @Autowired
-    private WholeHeadService wholeHeadService;
+    private WholeHeadDsService wholeHeadDsService;
 
-    @Scheduled(cron = "0 0/30 * ? * ?")
+    @Scheduled(cron = "0 0/2 * ? * ?")
     private void execute() {
 
         BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.WDT_STOCKOUT_ORDER_SYNC.code());
@@ -61,7 +61,7 @@ public class WdtStockoutOrderTradePushTask {
             busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKOUT_ORDER_SYNC.code());
             return;
         }
-        SyncResult syncResult = wholeHeadService.stockoutOrderTradeSync(syncModelList);
+        SyncResult syncResult = wholeHeadDsService.stockoutOrderTradeSync(syncModelList);
         if(syncResult.isSuccess()){
             busSyncConfigService.modifyGmtNextSyncByCode(syncRequest.getEndTime(),BusSyncConfigEnum.WDT_STOCKOUT_ORDER_SYNC.code());
         }else {

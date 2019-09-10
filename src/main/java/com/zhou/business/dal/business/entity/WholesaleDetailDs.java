@@ -2,7 +2,7 @@ package com.zhou.business.dal.business.entity;
 
 import java.math.BigDecimal;
 
-public class WholesaleDetail extends WholesaleDetailKey {
+public class WholesaleDetailDs extends WholesaleDetailKey {
     /**
      * null seatid
      */
@@ -292,7 +292,7 @@ public class WholesaleDetail extends WholesaleDetailKey {
         if (getClass() != that.getClass()) {
             return false;
         }
-        WholesaleDetail other = (WholesaleDetail) that;
+        WholesaleDetailDs other = (WholesaleDetailDs) that;
         return (this.getWholesaleid() == null ? other.getWholesaleid() == null : this.getWholesaleid().equals(other.getWholesaleid()))
             && (this.getProid() == null ? other.getProid() == null : this.getProid().equals(other.getProid()))
             && (this.getSeatid() == null ? other.getSeatid() == null : this.getSeatid().equals(other.getSeatid()))

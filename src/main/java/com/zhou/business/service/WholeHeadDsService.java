@@ -11,7 +11,7 @@ import java.util.List;
  * @Author xiaohu
  * @Date 2019/9/4 18:34
  */
-public interface WholeHeadService {
+public interface WholeHeadDsService {
 
     /**
      * 销售出库单同步

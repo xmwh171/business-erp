@@ -2,7 +2,7 @@ package com.zhou.business.dal.business.entity;
 
 import java.util.Date;
 
-public class WholesaleHead {
+public class WholesaleHeadDs {
     /**
      * null wholesaleid
      */
@@ -422,7 +422,7 @@ public class WholesaleHead {
         if (getClass() != that.getClass()) {
             return false;
         }
-        WholesaleHead other = (WholesaleHead) that;
+        WholesaleHeadDs other = (WholesaleHeadDs) that;
         return (this.getWholesaleid() == null ? other.getWholesaleid() == null : this.getWholesaleid().equals(other.getWholesaleid()))
             && (this.getWhid() == null ? other.getWhid() == null : this.getWhid().equals(other.getWhid()))
             && (this.getInputdate() == null ? other.getInputdate() == null : this.getInputdate().equals(other.getInputdate()))

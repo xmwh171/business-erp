@@ -1,10 +1,10 @@
 package com.zhou.business.dal.business.mapper;
 
-import com.zhou.business.dal.business.entity.WholesaleHead;
+import com.zhou.business.dal.business.entity.WholesaleHeadDs;
 
 import java.util.List;
 
-public interface WholesaleHeadMapper {
+public interface WholesaleHeadDsMapper {
     /**
      *
      * @mbggenerated
@@ -15,37 +15,37 @@ public interface WholesaleHeadMapper {
      *
      * @mbggenerated
      */
-    int insert(WholesaleHead record);
+    int insert(WholesaleHeadDs record);
 
     /**
      *
      * @mbggenerated
      */
-    int insertSelective(WholesaleHead record);
+    int insertSelective(WholesaleHeadDs record);
 
     /**
      *
      * @mbggenerated
      */
-    WholesaleHead selectByPrimaryKey(String wholesaleid);
+    WholesaleHeadDs selectByPrimaryKey(String wholesaleid);
 
     /**
      *
      * @mbggenerated
      */
-    int updateByPrimaryKeySelective(WholesaleHead record);
+    int updateByPrimaryKeySelective(WholesaleHeadDs record);
 
     /**
      *
      * @mbggenerated
      */
-    int updateByPrimaryKey(WholesaleHead record);
+    int updateByPrimaryKey(WholesaleHeadDs record);
 
     /**
      *
-     * @param wholesaleHeadList
+     * @param wholesaleHeadDsList
      */
-    void batchSave(List<WholesaleHead> wholesaleHeadList);
+    void batchSave(List<WholesaleHeadDs> wholesaleHeadDsList);
 
     /**
      *

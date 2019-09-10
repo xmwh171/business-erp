@@ -1,12 +1,12 @@
 package com.zhou.business.dal.business.mapper;
 
-import com.zhou.business.dal.business.entity.WholesaleDetail;
+import com.zhou.business.dal.business.entity.WholesaleDetailDs;
 import com.zhou.business.dal.business.entity.WholesaleDetailKey;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
-public interface WholesaleDetailMapper {
+public interface WholesaleDetailDsMapper {
     /**
      *
      * @mbggenerated
@@ -17,37 +17,37 @@ public interface WholesaleDetailMapper {
      *
      * @mbggenerated
      */
-    int insert(WholesaleDetail record);
+    int insert(WholesaleDetailDs record);
 
     /**
      *
      * @mbggenerated
      */
-    int insertSelective(WholesaleDetail record);
+    int insertSelective(WholesaleDetailDs record);
 
     /**
      *
      * @mbggenerated
      */
-    WholesaleDetail selectByPrimaryKey(WholesaleDetailKey key);
+    WholesaleDetailDs selectByPrimaryKey(WholesaleDetailKey key);
 
     /**
      *
      * @mbggenerated
      */
-    int updateByPrimaryKeySelective(WholesaleDetail record);
+    int updateByPrimaryKeySelective(WholesaleDetailDs record);
 
     /**
      *
      * @mbggenerated
      */
-    int updateByPrimaryKey(WholesaleDetail record);
+    int updateByPrimaryKey(WholesaleDetailDs record);
 
     /**
      *
-     * @param wholesaleDetailList
+     * @param wholesaleDetailDsList
      */
-    void batchSave(List<WholesaleDetail> wholesaleDetailList);
+    void batchSave(List<WholesaleDetailDs> wholesaleDetailDsList);
 
     /**
      *
@@ -55,5 +55,5 @@ public interface WholesaleDetailMapper {
      * @param proid
      * @return
      */
-    WholesaleDetail selectByWholesaleidAndProid(@Param("wholesaleid") String wholesaleid, @Param("proid") String proid);
+    WholesaleDetailDs selectByWholesaleidAndProid(@Param("wholesaleid") String wholesaleid, @Param("proid") String proid);
 }
