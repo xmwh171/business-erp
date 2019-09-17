@@ -1155,6 +1155,7 @@
     <result column="modified" jdbcType="TIMESTAMP" property="modified" />
     <result column="pay_time" jdbcType="TIMESTAMP" property="payTime" />
     <result column="stock_check_time" jdbcType="TIMESTAMP" property="stockCheckTime" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <collection property="itemList" ofType="com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeDetailSyncModel" resultMap="WdtStockoutOrderTradeDetailSyncModel"/>
   </resultMap>
   <resultMap id="WdtStockoutOrderTradeDetailSyncModel" type="com.zhou.business.dal.toolmall.model.WdtStockoutOrderTradeDetailSyncModel">
@@ -1165,7 +1166,7 @@
     <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
   </resultMap>
   <select id="selectBySyncRequest" parameterType="com.zhou.business.request.WdtStockoutOrderTradeSyncRequest" resultMap="WdtStockoutOrderTradeSyncModel">
-    select a.order_no,a.customer_no,a.modified,a.pay_time,a.stock_check_time,b.spec_no,b.goods_count,b.sell_price,b.tax_rate,b.cost_price
+    select a.order_no,a.customer_no,a.modified,a.pay_time,a.stock_check_time,b.spec_no,b.goods_count,b.sell_price,b.tax_rate,b.cost_price,a.customer_name
     from wdt_stockout_order_trade a left join wdt_stockout_order_trade_detail b on a.stockout_id = b.stockout_id
     where a.enabled=1 and b.enabled=1 and a.shop_no in
     <foreach collection="shopNoList" item="item" index="index" open="(" close=")" separator=",">

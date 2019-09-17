@@ -574,6 +574,7 @@
     <result column="customer_no" jdbcType="VARCHAR" property="customerNo" />
     <result column="gmt_modify" jdbcType="TIMESTAMP" property="gmtModify" />
     <result column="check_time" jdbcType="TIMESTAMP" property="checkTime" />
+    <result column="customer_name" jdbcType="VARCHAR" property="customerName" />
     <collection property="itemList" ofType="com.zhou.business.dal.toolmall.model.WdtStockinOrderRefundDetailSyncModel" resultMap="WdtStockinOrderRefundDetailSyncModel"/>
   </resultMap>
   <resultMap id="WdtStockinOrderRefundDetailSyncModel" type="com.zhou.business.dal.toolmall.model.WdtStockinOrderRefundDetailSyncModel">
@@ -584,7 +585,7 @@
     <result column="cost_price" jdbcType="DECIMAL" property="costPrice" />
   </resultMap>
   <select id="selectBySyncRequest" parameterType="com.zhou.business.request.WdtStockoutOrderTradeSyncRequest" resultMap="WdtStockinOrderRefundSyncModel">
-    select a.order_no,a.customer_no,a.gmt_modify,a.check_time,b.spec_no,b.goods_count,b.src_price,b.tax,b.cost_price
+    select a.order_no,a.customer_no,a.gmt_modify,a.check_time,b.spec_no,b.goods_count,b.src_price,b.tax,b.cost_price,a.customer_name
     from wdt_stockin_order_refund a left join wdt_stockin_order_refund_detail b on a.stockin_id = b.stockin_id
     where a.enabled=1 and b.enabled=1 and a.shop_no in
     <foreach collection="shopNoList" item="item" index="index" open="(" close=")" separator=",">

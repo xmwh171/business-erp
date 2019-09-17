@@ -79,6 +79,19 @@ public class WholesaleHeadDs {
     private String shflag;
 
     /**
+     *
+     */
+    private String clientname;
+
+    public String getClientname() {
+        return clientname;
+    }
+
+    public void setClientname(String clientname) {
+        this.clientname = clientname;
+    }
+
+    /**
      * null
      * @author gqf_ds
      * @date 2019-09-03 15:03:10

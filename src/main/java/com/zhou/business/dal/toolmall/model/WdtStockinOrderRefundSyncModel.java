@@ -33,7 +33,20 @@ public class WdtStockinOrderRefundSyncModel {
     /**
      *
      */
+    private String customerName;
+
+    /**
+     *
+     */
     private List<WdtStockinOrderRefundDetailSyncModel> itemList;
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
     public String getOrderNo() {
         return orderNo;

@@ -68,6 +68,7 @@ public class WholeHeadDsDsServiceImpl implements WholeHeadDsService {
                 wholesaleHeadDs.setInvoicedate(null);
                 wholesaleHeadDs.setShdate(syncModel.getStockCheckTime());
                 wholesaleHeadDs.setShflag("0");
+                wholesaleHeadDs.setClientname(syncModel.getCustomerName());
                 wholesaleHeadDsList.add(wholesaleHeadDs);
             }
             // 序号
@@ -130,6 +131,7 @@ public class WholeHeadDsDsServiceImpl implements WholeHeadDsService {
                 wholesaleHeadDs.setInvoicedate(null);
                 wholesaleHeadDs.setShdate(refundSyncModel.getCheckTime());
                 wholesaleHeadDs.setShflag("0");
+                wholesaleHeadDs.setClientname(refundSyncModel.getCustomerName());
                 wholesaleHeadDsList.add(wholesaleHeadDs);
             }
             // 序号

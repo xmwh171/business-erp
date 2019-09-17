@@ -38,7 +38,20 @@ public class WdtStockoutOrderTradeSyncModel {
     /**
      *
      */
+    private String customerName;
+
+    /**
+     *
+     */
     private List<WdtStockoutOrderTradeDetailSyncModel> itemList;
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 
     public String getOrderNo() {
         return orderNo;
