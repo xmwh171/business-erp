@@ -35,7 +35,7 @@ public class WdtStockoutOrderTradePushTask {
     @Autowired
     private WholeHeadDsService wholeHeadDsService;
 
-    @Scheduled(cron = "0 0/2 * ? * ?")
+    @Scheduled(cron = "0 0 6 * * ?")
     private void execute() {
 
         BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.WDT_STOCKOUT_ORDER_SYNC.code());

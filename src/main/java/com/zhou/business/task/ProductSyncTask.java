@@ -29,7 +29,7 @@ public class ProductSyncTask {
     @Autowired
     private ProductDsService productDsService;
 
-    @Scheduled(cron = "0 0/30 * ? * ?")
+    @Scheduled(cron = "0 0 6 * * ?")
     private void execute() {
 
         BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.BUSINESS_PRODUCT_SYNC.code());

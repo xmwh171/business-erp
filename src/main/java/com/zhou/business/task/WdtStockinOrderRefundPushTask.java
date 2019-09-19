@@ -36,7 +36,7 @@ public class WdtStockinOrderRefundPushTask {
     @Autowired
     private WholeHeadDsService wholeHeadDsService;
 
-    @Scheduled(cron = "0 0/2 * ? * ?")
+    @Scheduled(cron = "0 0 6 * * ?")
     private void execute() {
 
         BusSyncConfig busSyncConfig = busSyncConfigService.getByCode(BusSyncConfigEnum.WDT_STOCKIN_ORDER_REFUND_SYNC.code());
